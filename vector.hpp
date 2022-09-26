@@ -75,6 +75,8 @@ public:
 
     void draw(sf::RenderWindow& window);
 
+    friend double cos(Vector& left, Vector& right) { return left * right / (left.length() * right.length()); }
+
     friend std::ostream& operator<<(std::ostream& out, const Vector& vec);
     friend std::istream& operator>>(std::istream& in, Vector& vec);
 };
@@ -116,16 +118,15 @@ struct SystemCoord
 
         const static Vector entry = { e1.getX() * cstart_point.getX() + e2.getX() * cstart_point.getY() + e3.getX() * cstart_point.getZ(),
                                       e1.getY() * cstart_point.getX() + e2.getY() * cstart_point.getY() + e3.getY() * cstart_point.getZ(),
-                                      e1.getZ() * cstart_point.getX() + e3.getZ() * cstart_point.getY() + e3.getZ() * cstart_point.getZ() };
+                                      e1.getZ() * cstart_point.getX() + e2.getZ() * cstart_point.getY() + e3.getZ() * cstart_point.getZ() };
 
         Vector result = { e1.getX() * x + e2.getX() * y + e3.getX() * z,
                           e1.getY() * x + e2.getY() * y + e3.getY() * z,
-                          e1.getZ() * x + e3.getZ() * y + e3.getZ() * z };
+                          e1.getZ() * x + e2.getZ() * y + e3.getZ() * z };
 
         result /= determinate;
         result -= entry;
 
-        result.setZ(0);
         return result;
     }
 };

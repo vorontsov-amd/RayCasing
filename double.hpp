@@ -11,7 +11,7 @@ public:
 
     Double operator*=(Double right) { return cx *= right.cx; }
     Double operator+=(Double right) { return cx += right.cx; }
-    Double operator-=(Double right) { return cx += right.cx; }
+    Double operator-=(Double right) { return cx -= right.cx; }
     Double operator*(Double right) const;
     Double operator+(Double right) const;
     Double operator-(Double right) const;
@@ -19,6 +19,8 @@ public:
 
     bool operator==(Double right) { return std::abs(cx - right.cx) < EPS; }
     bool operator<=(Double right) { return cx <= right.cx; }
+
+    operator double() { return cx; }
 
     friend std::ostream& operator<<(std::ostream& out, const Double& num) { return out << num.cx; }
 };
